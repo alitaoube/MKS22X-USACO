@@ -61,7 +61,20 @@ public class USACO{
       int r = stomp[x][0];
       int c = stomp[x][1];
       int e = stomp[x][2];
+
+      int max = findMax(r, c, board, stomp);
+
     }
+  }
+
+  public static int findMax(int r, int c, int[][] board, int[][] stomp){
+    int max = 0;
+    for (int a = r; a < r+3; a++){
+      for (int b = c ;b < r+3 ;b++ ) {
+        if (board[a][b] > max) max = board[a][b];
+      }
+    }
+    return max;
   }
 
   public static String toString(int[][] arr){
