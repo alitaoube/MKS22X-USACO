@@ -8,7 +8,7 @@ public class USACO{
 
   public static int bronze(String filename){
     int[][] arr = null;
-    int[][] stomp;
+    int[][] stomp = null;
     int r = 0;
     int c = 0;
     int e = 0;
@@ -22,6 +22,7 @@ public class USACO{
       while (inf.hasNextLine()) {
         String[] line = inf.nextLine().split(" ");
         System.out.print(toString(line));
+        System.out.println();
         r = Integer.parseInt(line[0]);
         c = Integer.parseInt(line[1]);
         e = Integer.parseInt(line[2]);
@@ -36,13 +37,22 @@ public class USACO{
             arr[x][y] = Integer.parseInt(lines[y]);
           }
         }
+
+        stomp = new int[n][3];
+        for (int i = 0; i < n; i++){
+          line = inf.nextLine().split(" ");
+          for (int a = 0; a < 3; a++) {
+            stomp[i][a] = Integer.parseInt(line[a]);
+          }
+        }
       }
-      System.out.print(arr.toString());
+      System.out.print(toString(arr));
+      System.out.print(toString(stomp));
     }
     catch(FileNotFoundException f){
       f.printStackTrace();
     }
-    throw new Error();
+    return 0;
   }
 
   public static String toString(int[][] arr){
@@ -50,7 +60,9 @@ public class USACO{
     for (int[] x: arr){
       for (int y: x){
         output += y;
+        output += ' ';
       }
+      output += '\n';
     }
     return output;
   }
@@ -59,6 +71,7 @@ public class USACO{
     String output = "";
     for (String x: arr){
       output += x;
+      output += ' ';
     }
     return output;
   }
