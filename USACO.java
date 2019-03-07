@@ -64,13 +64,26 @@ public class USACO{
 
       int max = findMax(r, c, board, stomp);
 
+      int track = 0;
+      while (track < e){
+        digH(r, c, board, stomp, e, max);
+      }
     }
+  }
+
+  public static int[][] digH(int r, int c, int[][] board, int[][] stomp, int e, int max){
+    for (int a = r; a < r+3; a++ ) {
+      for (int b = c; b < c+3; b++ ) {
+        if (board[a][b] >= max) board[a][b]--;
+      }
+    }
+    return board;
   }
 
   public static int findMax(int r, int c, int[][] board, int[][] stomp){
     int max = 0;
     for (int a = r; a < r+3; a++){
-      for (int b = c ;b < r+3 ;b++ ) {
+      for (int b = c ;b < c+3 ;b++ ) {
         if (board[a][b] > max) max = board[a][b];
       }
     }
