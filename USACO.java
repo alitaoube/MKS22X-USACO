@@ -48,11 +48,20 @@ public class USACO{
       }
       System.out.print(toString(arr));
       System.out.print(toString(stomp));
+      dig(arr, stomp);
     }
     catch(FileNotFoundException f){
       f.printStackTrace();
     }
     return 0;
+  }
+
+  public static void dig(int[][] board, int[][] stomp){
+    for (int x = 0; x < stomp.length; x++){
+      int r = stomp[x][0];
+      int c = stomp[x][1];
+      int e = stomp[x][2];
+    }
   }
 
   public static String toString(int[][] arr){
