@@ -5,41 +5,62 @@ public class USACO{
   public static void main(String[] args) {
     bronze("test.txt");
   }
-  public static int bronze(String filename){
-    System.out.print(getArr("test.txt"));
-    return 0;
-  }
 
-  public static int[][] getArr(String filename){
-    int[][] arr;
+  public static int bronze(String filename){
+    int[][] arr = null;
+    int[][] stomp;
+    int r = 0;
+    int c = 0;
+    int e = 0;
+    int n = 0;
+
     try{
       File file = new File(filename);
       Scanner inf = new Scanner(file);
 
-      int x = 0;
-      int y = 0;
+
       while (inf.hasNextLine()) {
-        y = inf.nextLine().length();
-        x++;
+        String[] line = inf.nextLine().split(" ");
+        System.out.print(toString(line));
+        r = Integer.parseInt(line[0]);
+        c = Integer.parseInt(line[1]);
+        e = Integer.parseInt(line[2]);
+        n = Integer.parseInt(line[3]);
+        arr = new int[r][c];
 
-      }
-      arr = new int[x][y];
 
-      inf = new Scanner(file);
-      int z = 0;
-      while (inf.hasNextLine()){
-        String line = inf.nextLine();
-        for (int i = 0; i < line.length(); i++){
-          arr[z][i] = line[i];
+        for (int x = 0; x < r; x++){
+          String[] lines = inf.nextLine().split(" ");
+
+          for (int y = 0; y < c; y++){
+            arr[x][y] = Integer.parseInt(lines[y]);
+          }
         }
-        z++;
       }
-      return arr;
+      System.out.print(arr.toString());
     }
-    catch(FileNotFoundException e){
-      e.printStackTrace();
+    catch(FileNotFoundException f){
+      f.printStackTrace();
     }
     throw new Error();
+  }
+
+  public static String toString(int[][] arr){
+    String output = "";
+    for (int[] x: arr){
+      for (int y: x){
+        output += y;
+      }
+    }
+    return output;
+  }
+
+  public static String toString(String[] arr){
+    String output = "";
+    for (String x: arr){
+      output += x;
+    }
+    return output;
   }
 
   public static int silver(String filename){
