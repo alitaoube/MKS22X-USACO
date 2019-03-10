@@ -10,7 +10,7 @@ public class USACO{
     {5,6,7,11}
   };
     // System.out.print(findMax(1, 2, arr));
-    bronze("test.txt");
+    System.out.print(bronze("test.txt"));
   }
 
   public static int bronze(String filename){
@@ -56,11 +56,23 @@ public class USACO{
       // System.out.print(toString(arr));
       // System.out.print(toString(stomp));
       dig(arr, stomp);
+      return volume(arr);
     }
     catch(FileNotFoundException f){
       f.printStackTrace();
+      return 0;
     }
-    return 0;
+  }
+
+  public static int volume(int[][] board){
+    int total = 0;
+    toString(board);
+    for (int x = 0; x < board.length; x++){
+      for (int y = 0; y < board[x].length; y++){
+        total += board[x][y];
+      }
+    }
+    return 72*72*total;
   }
 
   public static void dig(int[][] board, int[][] stomp){
@@ -74,6 +86,15 @@ public class USACO{
       digH(r, c, board, stomp, e, max);
       }
     }
+
+  public void finalElevation(int[][] board, int e){
+    for (int x = 0; x < board.length; x++){
+      for (int y = 0; y < board[x].length; y++){
+        if (board[x][y] - e > 0) board[x][y] = 0;
+        else board[x][y] = board[x][y] - e;
+      }
+    }
+  }
 
   public static int[][] digH(int r, int c, int[][] board, int[][] stomp, int e, int max){
     int track = 0;
