@@ -56,6 +56,7 @@ public class USACO{
       // System.out.print(toString(arr));
       // System.out.print(toString(stomp));
       dig(arr, stomp);
+      finalElevation(arr, e);
       return volume(arr);
     }
     catch(FileNotFoundException f){
@@ -84,14 +85,17 @@ public class USACO{
       int max = findMax(r, c, board);
 
       digH(r, c, board, stomp, e, max);
-      }
+      // System.out.print(toString(board));
+      // finalElevation(board, e);
+      // System.out.print(toString(board));
+        }
     }
 
-  public void finalElevation(int[][] board, int e){
+  public static void finalElevation(int[][] board, int e){
     for (int x = 0; x < board.length; x++){
       for (int y = 0; y < board[x].length; y++){
-        if (board[x][y] - e > 0) board[x][y] = 0;
-        else board[x][y] = board[x][y] - e;
+        if (board[x][y] > e) board[x][y] = 0;
+        else board[x][y] = e - board[x][y];
       }
     }
   }
