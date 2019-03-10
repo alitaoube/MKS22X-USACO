@@ -9,8 +9,8 @@ public class USACO{
     {4,5,9,10},
     {5,6,7,11}
   };
-    System.out.print(findMax(1, 2, arr));
-    // bronze("test.txt");
+    // System.out.print(findMax(1, 2, arr));
+    bronze("test.txt");
   }
 
   public static int bronze(String filename){
@@ -28,8 +28,8 @@ public class USACO{
 
       while (inf.hasNextLine()) {
         String[] line = inf.nextLine().split(" ");
-        System.out.print(toString(line));
-        System.out.println();
+        // System.out.print(toString(line));
+        // System.out.println();
         r = Integer.parseInt(line[0]);
         c = Integer.parseInt(line[1]);
         e = Integer.parseInt(line[2]);
@@ -53,8 +53,8 @@ public class USACO{
           }
         }
       }
-      System.out.print(toString(arr));
-      System.out.print(toString(stomp));
+      // System.out.print(toString(arr));
+      // System.out.print(toString(stomp));
       dig(arr, stomp);
     }
     catch(FileNotFoundException f){
@@ -64,25 +64,30 @@ public class USACO{
   }
 
   public static void dig(int[][] board, int[][] stomp){
-    for (int x = 0; x < stomp.length; x++){
+    for (int x = 0; x < 1; x++){
       int r = stomp[x][0];
       int c = stomp[x][1];
       int e = stomp[x][2];
 
+      // System.out.print("E: " + e);
       int max = findMax(r, c, board);
 
-      int track = 0;
-      while (track < e){
-        digH(r, c, board, stomp, e, max);
+      digH(r, c, board, stomp, e, max);
       }
     }
-  }
 
   public static int[][] digH(int r, int c, int[][] board, int[][] stomp, int e, int max){
-    for (int a = r; a < r+3; a++ ) {
-      for (int b = c; b < c+3; b++ ) {
-        if (board[a][b] >= max) board[a][b]--;
+    int track = 0;
+    while (track < e){
+      for (int a = r; a < r+3; a++ ) {
+        for (int b = c; b < c+3; b++ ) {
+          if (board[a - 1][b - 1] >= max) board[a - 1][b - 1]--;
+        }
       }
+      max = findMax(r, c, board);
+      System.out.print(toString(board));
+      System.out.println();
+      track++;
     }
     return board;
   }
@@ -91,7 +96,7 @@ public class USACO{
     int max = 0;
     for (int a = r; a < r+3; a++){
       for (int b = c ;b < c+3 ;b++ ) {
-        if (max < board[a - 1][b - 1]) max = board[a - 1][a - 1];
+        if (max < board[a - 1][b - 1]) max = board[a - 1][b - 1];
       }
     }
     return max;
