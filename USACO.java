@@ -3,13 +3,6 @@ import java.io.*; // File, FileNotFoundException
 
 public class USACO{
   public static void main(String[] args) {
-    int[][]arr = {
-    {1,2,7,8},
-    {3,4,1,2},
-    {4,5,9,10},
-    {5,6,7,11}
-  };
-    // System.out.print(findMax(1, 2, arr));
     System.out.print(bronze("test.txt"));
   }
 
@@ -28,8 +21,6 @@ public class USACO{
 
       while (inf.hasNextLine()) {
         String[] line = inf.nextLine().split(" ");
-        // System.out.print(toString(line));
-        // System.out.println();
         r = Integer.parseInt(line[0]);
         c = Integer.parseInt(line[1]);
         e = Integer.parseInt(line[2]);
@@ -53,8 +44,6 @@ public class USACO{
           }
         }
       }
-      // System.out.print(toString(arr));
-      // System.out.print(toString(stomp));
       dig(arr, stomp);
       finalElevation(arr, e);
       return volume(arr);
@@ -65,7 +54,7 @@ public class USACO{
     }
   }
 
-  public static int volume(int[][] board){
+  private static int volume(int[][] board){
     int total = 0;
     toString(board);
     for (int x = 0; x < board.length; x++){
@@ -76,7 +65,7 @@ public class USACO{
     return 72*72*total;
   }
 
-  public static void dig(int[][] board, int[][] stomp){
+  private static void dig(int[][] board, int[][] stomp){
     for (int x = 0; x < stomp.length; x++){
       int r = stomp[x][0];
       int c = stomp[x][1];
@@ -85,13 +74,10 @@ public class USACO{
       int max = findMax(r, c, board);
 
       digH(r, c, board, stomp, e, max);
-      // System.out.print(toString(board));
-      // finalElevation(board, e);
-      // System.out.print(toString(board));
         }
     }
 
-  public static void finalElevation(int[][] board, int e){
+  private static void finalElevation(int[][] board, int e){
     for (int x = 0; x < board.length; x++){
       for (int y = 0; y < board[x].length; y++){
         if (board[x][y] > e) board[x][y] = 0;
@@ -100,7 +86,7 @@ public class USACO{
     }
   }
 
-  public static int[][] digH(int r, int c, int[][] board, int[][] stomp, int e, int max){
+  private static int[][] digH(int r, int c, int[][] board, int[][] stomp, int e, int max){
     int track = 0;
     while (track < e){
       for (int a = r; a < r+3; a++ ) {
@@ -115,7 +101,7 @@ public class USACO{
     return board;
   }
 
-  public static int findMax(int r, int c, int[][] board){
+  private static int findMax(int r, int c, int[][] board){
     int max = 0;
     for (int a = r; a < r+3; a++){
       for (int b = c ;b < c+3 ;b++ ) {
@@ -125,7 +111,7 @@ public class USACO{
     return max;
   }
 
-  public static String toString(int[][] arr){
+  private static String toString(int[][] arr){
     String output = "";
     for (int[] x: arr){
       for (int y: x){
@@ -133,15 +119,6 @@ public class USACO{
         output += ' ';
       }
       output += '\n';
-    }
-    return output;
-  }
-
-  public static String toString(String[] arr){
-    String output = "";
-    for (String x: arr){
-      output += x;
-      output += ' ';
     }
     return output;
   }
