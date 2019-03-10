@@ -3,7 +3,7 @@ import java.io.*; // File, FileNotFoundException
 
 public class USACO{
   public static void main(String[] args) {
-    System.out.print(bronze("test.txt"));
+    System.out.print(silver("test1.txt"));
   }
 
   public static int bronze(String filename){
@@ -124,34 +124,50 @@ public class USACO{
   }
 
   public static int silver(String filename){
+    int N = 0 , M = 0, T = 0, R1 = 0, C1 = 0, R2 = 0, C2 = 0;
+    int[][] board = null;
     try{
       File file = new File(filename);
       Scanner inf = new Scanner(file);
-      int N = 0 , M = 0, T = 0, R1 = 0, C1 = 0, R2 = 0, C2 = 0;
-      int[][] board = null;
+
       int line = 0;
 
 
       while (inf.hasNextLine()) {
-        if (line == 0){
+        if (line == 0){ // First row of numbers
           Scanner s = new Scanner(inf.nextLine());
-          String[] lines = inf.nextLine().split(" ");
-
-          N = Integer.parseInt(lines[0]);
-          M = Integer.parseInt(lines[1]);
-          T = Integer.parseInt(lines[2]);
+          int x = 0;
+          while (s.hasNextInt()){
+            if ( x == 0) N = s.nextInt();
+            if ( x == 1) M = s.nextInt();
+            if ( x == 2) T = s.nextInt();
+            System.out.print("hello");
+            x++;
+          }
         }
-        board = new int[N][M];
-        if (line > 0 && line < N + 1){
-          String s = inf.nextLine();
-          String[] lines = inf.nextLine().split(" ");
 
+        board = new int[N][M];
+        if (line > 0 && line < N + 1){ // Everything in the middle
+          String s = inf.nextLine();
+          int i = 0;
+          for (int x = 0; x < s.length(); x++){
+            board[line - 1][i] = s.charAt(x);
+            i++;
+          }
+        }
+        if (line == N+1){ // Last row of numbers
+          Scanner s = new Scanner(inf.nextLine());
+          N = s.nextInt();
+          M = s.nextInt();
+          T = s.nextInt();
         }
       }
+      line++;
     }
     catch(FileNotFoundException e){
 
     }
+    System.out.print(board);
     return -1; // placeholder
   }
 }
