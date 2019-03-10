@@ -64,12 +64,11 @@ public class USACO{
   }
 
   public static void dig(int[][] board, int[][] stomp){
-    for (int x = 0; x < 1; x++){
+    for (int x = 0; x < stomp.length; x++){
       int r = stomp[x][0];
       int c = stomp[x][1];
       int e = stomp[x][2];
 
-      // System.out.print("E: " + e);
       int max = findMax(r, c, board);
 
       digH(r, c, board, stomp, e, max);
@@ -85,8 +84,7 @@ public class USACO{
         }
       }
       max = findMax(r, c, board);
-      System.out.print(toString(board));
-      System.out.println();
+
       track++;
     }
     return board;
