@@ -3,7 +3,14 @@ import java.io.*; // File, FileNotFoundException
 
 public class USACO{
   public static void main(String[] args) {
-    bronze("test.txt");
+    int[][]arr = {
+    {1,2,7,8},
+    {3,4,1,2},
+    {4,5,9,10},
+    {5,6,7,11}
+  };
+    System.out.print(findMax(1, 2, arr));
+    // bronze("test.txt");
   }
 
   public static int bronze(String filename){
@@ -62,7 +69,7 @@ public class USACO{
       int c = stomp[x][1];
       int e = stomp[x][2];
 
-      int max = findMax(r, c, board, stomp);
+      int max = findMax(r, c, board);
 
       int track = 0;
       while (track < e){
@@ -80,11 +87,11 @@ public class USACO{
     return board;
   }
 
-  public static int findMax(int r, int c, int[][] board, int[][] stomp){
+  public static int findMax(int r, int c, int[][] board){
     int max = 0;
-    for (int a = r; a < r+2; a++){
-      for (int b = c ;b < c+2 ;b++ ) {
-        if (board[a][b] > max) max = board[a][b];
+    for (int a = r; a < r+3; a++){
+      for (int b = c ;b < c+3 ;b++ ) {
+        if (max < board[a - 1][b - 1]) max = board[a - 1][a - 1];
       }
     }
     return max;
