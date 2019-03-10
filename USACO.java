@@ -124,6 +124,34 @@ public class USACO{
   }
 
   public static int silver(String filename){
+    try{
+      File file = new File(filename);
+      Scanner inf = new Scanner(file);
+      int N = 0 , M = 0, T = 0, R1 = 0, C1 = 0, R2 = 0, C2 = 0;
+      int[][] board = null;
+      int line = 0;
+
+
+      while (inf.hasNextLine()) {
+        if (line == 0){
+          Scanner s = new Scanner(inf.nextLine());
+          String[] lines = inf.nextLine().split(" ");
+
+          N = Integer.parseInt(lines[0]);
+          M = Integer.parseInt(lines[1]);
+          T = Integer.parseInt(lines[2]);
+        }
+        board = new int[N][M];
+        if (line > 0 && line < N + 1){
+          String s = inf.nextLine();
+          String[] lines = inf.nextLine().split(" ");
+
+        }
+      }
+    }
+    catch(FileNotFoundException e){
+
+    }
     return -1; // placeholder
   }
 }
