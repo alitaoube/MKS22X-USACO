@@ -123,51 +123,66 @@ public class USACO{
     return output;
   }
 
+  private static String toString(String[] arr){
+    String output = "";
+    for (String x: arr){
+      output += x;
+    }
+    return output;
+  }
+
+  private static String toString(String[][] arr){
+    String output = "";
+    for (String[] x: arr){
+      for (String y: x){
+        output += y;
+        output += ' ';
+      }
+      output += '\n';
+    }
+    return output;
+  }
+
   public static int silver(String filename){
     int N = 0 , M = 0, T = 0, R1 = 0, C1 = 0, R2 = 0, C2 = 0;
-    int[][] board = null;
+    String[][] board = null;
     try{
       File file = new File(filename);
       Scanner inf = new Scanner(file);
 
-      int line = 0;
+      String[] line = inf.nextLine().split(" ");
+      N = Integer.parseInt(line[0]);
+      M = Integer.parseInt(line[1]);
+      T = Integer.parseInt(line[2]);
+
+      board = new String[N][M];
+
+      // System.out.print(N);
+      // System.out.println();
+      // System.out.print(M);
+      // System.out.println();
+      // System.out.print(toString(board));
 
 
-      while (inf.hasNextLine()) {
-        if (line == 0){ // First row of numbers
-          Scanner s = new Scanner(inf.nextLine());
-          int x = 0;
-          while (s.hasNextInt()){
-            if ( x == 0) N = s.nextInt();
-            if ( x == 1) M = s.nextInt();
-            if ( x == 2) T = s.nextInt();
-            System.out.print("hello");
-            x++;
-          }
-        }
-
-        board = new int[N][M];
-        if (line > 0 && line < N + 1){ // Everything in the middle
-          String s = inf.nextLine();
-          int i = 0;
-          for (int x = 0; x < s.length(); x++){
-            board[line - 1][i] = s.charAt(x);
-            i++;
-          }
-        }
-        if (line == N+1){ // Last row of numbers
-          Scanner s = new Scanner(inf.nextLine());
-          N = s.nextInt();
-          M = s.nextInt();
-          T = s.nextInt();
+      for (int x = 0; x < N; x++){
+        String[] lines = inf.nextLine().split("");
+        // System.out.print(toString(lines));
+        for (int y = 0; y < M; y++){
+          board[x][y] = lines[y];
         }
       }
-      line++;
+      line = inf.nextLine().split(" ");
+
+      R1 = Integer.parseInt(line[0]);
+      C1 = Integer.parseInt(line[1]);
+      R2 = Integer.parseInt(line[2]);
+      C2 = Integer.parseInt(line[3]);
+      System.out.print(toString(board));
     }
     catch(FileNotFoundException e){
 
     }
-    System.out.print(board);
+    // System.out.print(board);
     return -1; // placeholder
   }
 }
