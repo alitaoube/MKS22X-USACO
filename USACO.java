@@ -180,9 +180,43 @@ public class USACO{
       System.out.print(toString(board));
     }
     catch(FileNotFoundException e){
-
+      e.printStackTrace();
     }
     // System.out.print(board);
     return -1; // placeholder
+  }
+
+  private boolean isValid(int row, int col){ // Checks that all params are met
+    return (row >= 0 && col >= 0 && row < board.length && col < board[row].length);
+  } 
+
+  private static int silverH(String[] board,  int T, int R1, int C1, int R2, C2){
+    int[][] moves = {
+      {1, 0},
+      {-1,0},
+      {0, 1},
+      {0,-1}
+    };
+    int[][] oboard = new int[board.length][board[0].length];
+    for (int r = 0; x < board.length; x++){
+      for (int c = 0; c < board[r].length; c++){
+        if (map[r][c] == '*' ) oboard[r][c] = -1;
+        else oboard[r][c] = 0;
+      }
+    }
+    oboard[r][c] = 1;
+
+    for (int x = time; x > 0 ; x++) {
+      for (int r = 0; x < board.length; x++){
+        for (int c = 0; c < board[r].length; c++){
+          if (oboard[r][c] > 0){
+            for (int i = 0; i < moves.length; i++){
+              int row = r + moves[i][0];
+              int col = c + moves[i][1];
+            }
+          }
+        }
+      }
+    }
   }
 }
