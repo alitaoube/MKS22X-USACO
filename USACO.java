@@ -199,12 +199,14 @@ public class USACO{
     };
 
     int[][] oboard = new int[board.length][board[0].length];
-    for (int r = 0; r < oboard.length; r++){
+
+    for (int r = 0; r < oboard.length; r++){        // Assigning values of alternate board
       for (int c = 0; c < oboard[r].length; c++){
         if (board[r][c] == '*') oboard[r][c] = -1;
         else oboard[r][c] = 0;
       }
     }
+
     System.out.print(toString(oboard));
     oboard[R1][C1] = 1;
 
