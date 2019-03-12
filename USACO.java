@@ -173,10 +173,10 @@ public class USACO{
       }
       line = inf.nextLine().split(" ");
 
-      R1 = Integer.parseInt(line[0]);
-      C1 = Integer.parseInt(line[1]);
-      R2 = Integer.parseInt(line[2]);
-      C2 = Integer.parseInt(line[3]);
+      R1 = Integer.parseInt(line[0]) - 1;
+      C1 = Integer.parseInt(line[1]) - 1;
+      R2 = Integer.parseInt(line[2]) - 1;
+      C2 = Integer.parseInt(line[3]) - 1;
       // System.out.print(toString(board));
     }
     catch(FileNotFoundException e){
@@ -208,15 +208,18 @@ public class USACO{
     System.out.print(toString(oboard));
     oboard[R1][C1] = 1;
 
+    System.out.print("T : " + T);
+    System.out.println();
+
     for (int x = T; x > 0 ; x--) {
-      for (int r = 0; x < board.length; x++){
-        for (int c = 0; c < board[r].length; c++){
-          if (oboard[r][c] != -1){
+      for (int r = 0; r < oboard.length; r++){
+        for (int c = 0; c < oboard[r].length; c++){
+          if (oboard[r][c] > 0){
             for (int i = 0; i < moves.length; i++){
               int row = r + moves[i][0];
               int col = c + moves[i][1];
-              if (isValid(oboard, r, c)){
-                oboard[r][c]++;
+              if (isValid(oboard, row, col) && oboard[row][col] != -1){
+                oboard[row][col]++;
               }
               System.out.print(toString(oboard));
               System.out.println();
