@@ -145,7 +145,7 @@ public class USACO{
 
   public static int silver(String filename){
     int N = 0 , M = 0, T = 0, R1 = 0, C1 = 0, R2 = 0, C2 = 0;
-    String[][] board = null;
+    char[][] board = null;
     try{
       File file = new File(filename);
       Scanner inf = new Scanner(file);
@@ -155,7 +155,7 @@ public class USACO{
       M = Integer.parseInt(line[1]);
       T = Integer.parseInt(line[2]);
 
-      board = new String[N][M];
+      board = new char[N][M];
 
       // System.out.print(N);
       // System.out.println();
@@ -168,7 +168,7 @@ public class USACO{
         String[] lines = inf.nextLine().split("");
         // System.out.print(toString(lines));
         for (int y = 0; y < M; y++){
-          board[x][y] = lines[y];
+          board[x][y] = lines[y].charAt(0);
         }
       }
       line = inf.nextLine().split(" ");
@@ -177,46 +177,67 @@ public class USACO{
       C1 = Integer.parseInt(line[1]);
       R2 = Integer.parseInt(line[2]);
       C2 = Integer.parseInt(line[3]);
-      System.out.print(toString(board));
+      // System.out.print(toString(board));
     }
     catch(FileNotFoundException e){
       e.printStackTrace();
     }
     // System.out.print(board);
-    return -1; // placeholder
+    return silverH(board, T, R1, C1, R2, C2); // placeholder
   }
 
-  private boolean isValid(int row, int col){ // Checks that all params are met
-    return (row >= 0 && col >= 0 && row < board.length && col < board[row].length);
-  } 
+  private static boolean isValid(int[][] arr, int row, int col){ // Checks that all params are met
+    return (row >= 0 && col >= 0 && row < arr.length && col < arr[row].length);
+  }
 
-  private static int silverH(String[] board,  int T, int R1, int C1, int R2, C2){
+  private static int silverH(char[][] board,  int T, int R1, int C1, int R2, int C2){
     int[][] moves = {
       {1, 0},
       {-1,0},
       {0, 1},
       {0,-1}
     };
+
     int[][] oboard = new int[board.length][board[0].length];
-    for (int r = 0; x < board.length; x++){
-      for (int c = 0; c < board[r].length; c++){
-        if (map[r][c] == '*' ) oboard[r][c] = -1;
+    for (int r = 0; r < oboard.length; r++){
+      for (int c = 0; c < oboard[r].length; c++){
+        if (board[r][c] == '*') oboard[r][c] = -1;
         else oboard[r][c] = 0;
       }
     }
-    oboard[r][c] = 1;
+    System.out.print(toString(oboard));
+    oboard[R1][C1] = 1;
 
-    for (int x = time; x > 0 ; x++) {
+    for (int x = T; x > 0 ; x--) {
       for (int r = 0; x < board.length; x++){
         for (int c = 0; c < board[r].length; c++){
-          if (oboard[r][c] > 0){
+          if (oboard[r][c] != -1){
             for (int i = 0; i < moves.length; i++){
               int row = r + moves[i][0];
               int col = c + moves[i][1];
+              if (isValid(oboard, r, c)){
+                oboard[r][c]++;
+              }
+              System.out.print(toString(oboard));
+              System.out.println();
             }
           }
         }
       }
     }
+    System.out.print(toString(board));
+    System.out.print(toString(oboard));
+    return oboard[R2][C2];
+  }
+
+  public static String toString(char[][] board){
+    String output = "";
+    for (char[] x: board){
+      for (char y: x){
+        output += y;
+      }
+      output += '\n';
+    }
+    return output;
   }
 }
