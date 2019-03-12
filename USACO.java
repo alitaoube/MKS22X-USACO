@@ -21,16 +21,15 @@ public class USACO{
 
       while (inf.hasNextLine()) {
         String[] line = inf.nextLine().split(" ");
-        r = Integer.parseInt(line[0]);
+        r = Integer.parseInt(line[0]);  // Just sets all values from the first line
         c = Integer.parseInt(line[1]);
         e = Integer.parseInt(line[2]);
         n = Integer.parseInt(line[3]);
         arr = new int[r][c];
 
-
+        // Set all the values from the actual board
         for (int x = 0; x < r; x++){
           String[] lines = inf.nextLine().split(" ");
-
           for (int y = 0; y < c; y++){
             arr[x][y] = Integer.parseInt(lines[y]);
           }
@@ -77,8 +76,8 @@ public class USACO{
         }
     }
 
-  private static void finalElevation(int[][] board, int e){
-    for (int x = 0; x < board.length; x++){
+  private static void finalElevation(int[][] board, int e){ // Takes the final elevation var
+    for (int x = 0; x < board.length; x++){             // and subtracts board value and final elev
       for (int y = 0; y < board[x].length; y++){
         if (board[x][y] > e) board[x][y] = 0;
         else board[x][y] = e - board[x][y];
@@ -89,12 +88,12 @@ public class USACO{
   private static int[][] digH(int r, int c, int[][] board, int[][] stomp, int e, int max){
     int track = 0;
     while (track < e){
-      for (int a = r; a < r+3; a++ ) {
+      for (int a = r; a < r+3; a++ ) { // Loop through a 3x3 grid
         for (int b = c; b < c+3; b++ ) {
           if (board[a - 1][b - 1] >= max) board[a - 1][b - 1]--;
         }
       }
-      max = findMax(r, c, board);
+      max = findMax(r, c, board); // Gets the largest value
 
       track++;
     }
@@ -150,7 +149,7 @@ public class USACO{
       File file = new File(filename);
       Scanner inf = new Scanner(file);
 
-      String[] line = inf.nextLine().split(" ");
+      String[] line = inf.nextLine().split(" ");  // Loop through and set vars
       N = Integer.parseInt(line[0]);
       M = Integer.parseInt(line[1]);
       T = Integer.parseInt(line[2]);
@@ -191,7 +190,7 @@ public class USACO{
   }
 
   private static int silverH(char[][] board,  int T, int R1, int C1, int R2, int C2){
-    int[][] moves = {
+    int[][] moves = { // Horizontal and vertical moves
       {1, 0},
       {-1,0},
       {0, 1},
@@ -234,28 +233,29 @@ public class USACO{
     }
     // System.out.print(toString(board));
     // System.out.print(toString(oboard));
+    System.out.print(toString(oboard));
     return oboard[R2][C2].first;
   }
 
-  public static String toString(char[][] board){
+  public static String toString(Tile[][] board){
     String output = "";
-    for (char[] x: board){
-      for (char y: x){
-        output += y;
+    for (Tile[] x: board){
+      for (Tile y: x){
+        output += y.first;
       }
       output += '\n';
     }
     return output;
   }
+}
 
-  public class Tile{
-    int first, second;
-    public Tile(int first1, int second1){
-      first = first1;
-      second = second1;
-    }
-    public void update(int x){
-      second += x;
-    }
+class Tile{
+  int first, second;
+  public Tile(int first1, int second1){
+    first = first1;
+    second = second1;
+  }
+  public void update(int x){
+    second += x;
   }
 }
