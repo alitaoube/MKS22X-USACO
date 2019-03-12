@@ -186,7 +186,7 @@ public class USACO{
     return silverH(board, T, R1, C1, R2, C2); // placeholder
   }
 
-  private static boolean isValid(int[][] arr, int row, int col){ // Checks that all params are met
+  private static boolean isValid(Tile[][] arr, int row, int col){ // Checks that all params are met
     return (row >= 0 && col >= 0 && row < arr.length && col < arr[row].length);
   }
 
@@ -198,17 +198,19 @@ public class USACO{
       {0,-1}
     };
 
-    int[][] oboard = new int[board.length][board[0].length];
+    Tile[][] oboard = new Tile[board.length][board[0].length];
 
     for (int r = 0; r < oboard.length; r++){        // Assigning values of alternate board
       for (int c = 0; c < oboard[r].length; c++){
-        if (board[r][c] == '*') oboard[r][c] = -1;
-        else oboard[r][c] = 0;
+        if (board[r][c] == '*') {
+          oboard[r][c] = new Tile(-1,-1);
+        }
+        else oboard[r][c] = new Tile(0, 0);
       }
     }
 
-    System.out.print(toString(oboard));
-    oboard[R1][C1] = 1;
+    // System.out.print(toString(oboard));
+    oboard[R1][C1] = new Tile(1,0);
 
     System.out.print("T : " + T);
     System.out.println();
@@ -216,23 +218,23 @@ public class USACO{
     for (int x = T; x > 0 ; x--) {
       for (int r = 0; r < oboard.length; r++){
         for (int c = 0; c < oboard[r].length; c++){
-          if (oboard[r][c] > 0){
+          if (oboard[r][c].first > 0){
             for (int i = 0; i < moves.length; i++){
               int row = r + moves[i][0];
               int col = c + moves[i][1];
-              if (isValid(oboard, row, col) && oboard[row][col] != -1){
-                oboard[row][col]++;
+              if (isValid(oboard, row, col) && oboard[row][col].first != -1){
+                oboard[row][col].update(oboard[r][c].first);
               }
-              System.out.print(toString(oboard));
-              System.out.println();
+              // System.out.print(toString(oboard));
+              // System.out.println();
             }
           }
         }
       }
     }
-    System.out.print(toString(board));
-    System.out.print(toString(oboard));
-    return oboard[R2][C2];
+    // System.out.print(toString(board));
+    // System.out.print(toString(oboard));
+    return oboard[R2][C2].first;
   }
 
   public static String toString(char[][] board){
@@ -244,5 +246,16 @@ public class USACO{
       output += '\n';
     }
     return output;
+  }
+
+  public class Tile{
+    int first, second;
+    public Tile(int first1, int second1){
+      first = first1;
+      second = second1;
+    }
+    public void update(int x){
+      second += x;
+    }
   }
 }
