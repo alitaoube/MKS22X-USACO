@@ -101,6 +101,7 @@ public class USACO{
   }
 
   private static int findMax(int r, int c, int[][] board){
+    // loops through a 3x3 board to find highest value
     int max = 0;
     for (int a = r; a < r+3; a++){
       for (int b = c ;b < c+3 ;b++ ) {
@@ -146,6 +147,7 @@ public class USACO{
     int N = 0 , M = 0, T = 0, R1 = 0, C1 = 0, R2 = 0, C2 = 0;
     char[][] board = null;
     try{
+      // reads through file and sets appropriate values
       File file = new File(filename);
       Scanner inf = new Scanner(file);
 
@@ -156,16 +158,8 @@ public class USACO{
 
       board = new char[N][M];
 
-      // System.out.print(N);
-      // System.out.println();
-      // System.out.print(M);
-      // System.out.println();
-      // System.out.print(toString(board));
-
-
       for (int x = 0; x < N; x++){
         String[] lines = inf.nextLine().split("");
-        // System.out.print(toString(lines));
         for (int y = 0; y < M; y++){
           board[x][y] = lines[y].charAt(0);
         }
@@ -176,7 +170,6 @@ public class USACO{
       C1 = Integer.parseInt(line[1]) - 1;
       R2 = Integer.parseInt(line[2]) - 1;
       C2 = Integer.parseInt(line[3]) - 1;
-      // System.out.print(toString(board));
     }
     catch(FileNotFoundException e){
       e.printStackTrace();
@@ -201,38 +194,34 @@ public class USACO{
 
     for (int r = 0; r < oboard.length; r++){        // Assigning values of alternate board
       for (int c = 0; c < oboard[r].length; c++){
-        if (board[r][c] == '*') {
-          oboard[r][c] = new Tile(-1,-1);
-        }
+        if (board[r][c] == '*') oboard[r][c] = new Tile(-1,-1);
         else oboard[r][c] = new Tile(0, 0);
       }
     }
-
-    // System.out.print(toString(oboard));
     oboard[R1][C1] = new Tile(1,0);
 
-    System.out.print("T : " + T);
-    System.out.println();
-
-    for (int x = T; x > 0 ; x--) {
+    for (int track = T; track > 0 ; track--) {
       for (int r = 0; r < oboard.length; r++){
         for (int c = 0; c < oboard[r].length; c++){
           if (oboard[r][c].first > 0){
             for (int i = 0; i < moves.length; i++){
+              // moves in all move combos
               int row = r + moves[i][0];
               int col = c + moves[i][1];
               if (isValid(oboard, row, col) && oboard[row][col].first != -1){
                 oboard[row][col].update(oboard[r][c].first);
               }
-              // System.out.print(toString(oboard));
-              // System.out.println();
             }
           }
         }
       }
+    for (int a = 0; a < oboard.length; a++){
+      for (int b = 0; b < oboard[a].length; b++){
+        oboard[a][b].first = oboard[a][b].second; // switch first and second values
+        if (oboard[a][b].second != -1) oboard[a][b].second = 0; // if it's not a tree, set its second value to 0
+      }
     }
-    // System.out.print(toString(board));
-    // System.out.print(toString(oboard));
+  }
     System.out.print(toString(oboard));
     return oboard[R2][C2].first;
   }
@@ -249,7 +238,7 @@ public class USACO{
   }
 }
 
-class Tile{
+class Tile{ // helper class to store two values for each tile on the board
   int first, second;
   public Tile(int first1, int second1){
     first = first1;
