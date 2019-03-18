@@ -2,10 +2,6 @@ import java.util.Scanner;
 import java.io.*; // File, FileNotFoundException
 
 public class USACO{
-  public static void main(String[] args) {
-    System.out.print(silver("test1.txt"));
-  }
-
   public static int bronze(String filename){
     int[][] arr = null;
     int[][] stomp = null;
@@ -174,7 +170,6 @@ public class USACO{
     catch(FileNotFoundException e){
       e.printStackTrace();
     }
-    // System.out.print(board);
     return silverH(board, T, R1, C1, R2, C2); // placeholder
   }
 
@@ -222,7 +217,6 @@ public class USACO{
       }
     }
   }
-    System.out.print(toString(oboard));
     return oboard[R2][C2].first;
   }
 
